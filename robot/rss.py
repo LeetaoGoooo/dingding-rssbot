@@ -53,7 +53,6 @@ class RssRobot:
 
 
 def send_rss():
-    print(f'send rss')
     rss_bot = RssRobot()
     rss_bot.send_rss()
 
