@@ -17,8 +17,8 @@ import os
 class RssRobot:
     def __init__(self):
         self.robot = DingtalkChatbot(
-            os.environ.get("webhook"),
-            pc_slide=True, secret=os.environ.get("secret"))
+            os.environ.get("DD_WEBHOOK"),
+            pc_slide=True, secret=os.environ.get("DD_SECRET"))
 
     def parse_rss(self):
         rss_list = Rss.select()

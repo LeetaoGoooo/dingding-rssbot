@@ -23,6 +23,9 @@ jobs:
         cd robot
         pip install -r requirements.txt
     - name: send rss
+      env:
+        DD_WEBHOOK: ${{ secrets.webhook }}
+        DD_SECRET: ${{ secrets.secret }}
       run: |
         cd robot
         python rss.py
