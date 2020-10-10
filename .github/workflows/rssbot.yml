@@ -21,8 +21,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        ls
+        cd rssbot
         pip install dateparser==0.7.6 DingtalkChatbot==1.5.1 feedparser==6.0.1 peewee==3.13.3
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: send rss
       run: |
+        ls
         python rss.py
