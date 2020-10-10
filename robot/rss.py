@@ -22,32 +22,31 @@ class RssRobot:
 
     def parse_rss(self):
         rss_list = Rss.select()
-        rss_history_list = []
         rss_card_dict = {}
         post_url_list = [rss_history.url for rss_history in
                          History.select().where(History.publish_at == datetime.today().strftime("%Y-%m-%d"))]
         for rss in rss_list:
+            rss_history_list = []
             card_list = [
                 CardItem(title=rss.title, url=rss.url, pic_url=rss.cover)]
-            feed = feedparser.parse(rss.feed)
+            feed = feedparser.parse(rss.feed)            
             for entry in feed.entries:
                 if entry.link not in post_url_list and self.is_today(entry):
                     card_list.append(CardItem(title=f'{entry.title}', url=entry.link,
-                                              pic_url='https://ftp.bmp.ovh/imgs/2020/07/6cdb9f606677c9e3.jpg'))
+                                            pic_url='https://ftp.bmp.ovh/imgs/2020/07/6cdb9f606677c9e3.jpg'))
                     rss_history_list.append(History(url=entry.link))
 
             if len(card_list) > 1:
                 rss_card_dict[rss.title] = card_list
-
-        with db.atomic():
-            History.bulk_create(rss_history_list, batch_size=10)
+                with db.atomic():
+                    History.bulk_create(rss_history_list, batch_size=10)
 
         return rss_card_dict
 
     def is_today(self, entry):
         return dateparser.parse(entry['updated']).date() == datetime.today().date()
 
-    def send_rss(self):
+    def send_rss(self, card_list):
         rss_card_dict = self.parse_rss()
         for key in rss_card_dict:
             self.robot.send_feed_card(rss_card_dict[key])
