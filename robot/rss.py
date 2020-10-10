@@ -38,8 +38,9 @@ class RssRobot:
 
             if len(card_list) > 1:
                 rss_card_dict[rss.title] = card_list
-                with db.atomic():
-                    History.bulk_create(rss_history_list, batch_size=100)
+
+        with db.atomic():
+            History.bulk_create(rss_history_list, batch_size=10)
 
         return rss_card_dict
 

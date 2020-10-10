@@ -18,7 +18,7 @@ class Rss(BaseModel):
 
 class History(BaseModel):
     url = CharField(max_length=255)
-    publish_at = DateTimeField(default=datetime.datetime.now)
+    publish_at = DateField(default=datetime.datetime.now)
 
 
 def create_tables():
