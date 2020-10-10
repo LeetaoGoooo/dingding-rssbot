@@ -46,7 +46,7 @@ class RssRobot:
     def is_today(self, entry):
         return dateparser.parse(entry['updated']).date() == datetime.today().date()
 
-    def send_rss(self, card_list):
+    def send_rss(self):
         rss_card_dict = self.parse_rss()
         for key in rss_card_dict:
             self.robot.send_feed_card(rss_card_dict[key])
