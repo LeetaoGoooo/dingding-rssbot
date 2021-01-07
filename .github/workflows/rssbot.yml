@@ -7,11 +7,12 @@ on:
     
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
     - name: 'Checkout codes'
       uses: actions/checkout@v2
+      with:
+        ref: dev
     - name: Set up Python 3.7.6
       uses: actions/setup-python@v2
       with:
