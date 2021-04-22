@@ -21,6 +21,7 @@ class RssRobot:
             pc_slide=True, secret=os.environ.get("DD_SECRET"))
 
     def parse_rss(self):
+        # self.remove_old_history()
         rss_list = Rss.select()
         rss_card_dict = {}
         post_url_list = [rss_history.url for rss_history in
@@ -50,6 +51,10 @@ class RssRobot:
         rss_card_dict = self.parse_rss()
         for key in rss_card_dict:
             self.robot.send_feed_card(rss_card_dict[key])
+    
+    def remove_old_history(self):
+        history_list = History.delete().where(History.publish_at < datetime.today().strftime("%Y-%m-%d"))
+        history_list.execute()
 
 
 def send_rss():
