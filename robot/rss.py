@@ -21,7 +21,7 @@ class RssRobot:
             pc_slide=True, secret=os.environ.get("DD_SECRET"))
 
     def parse_rss(self):
-        self.remove_old_history()
+        # self.remove_old_history()
         rss_list = Rss.select()
         rss_card_dict = {}
         post_url_list = [rss_history.url for rss_history in
