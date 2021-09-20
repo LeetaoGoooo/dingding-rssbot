@@ -7,7 +7,7 @@ rss.py
 推送 Rss 信息到钉钉机器人Api
  
 """
-from datetime import datetime
+from datetime import datetime,timedelta
 import feedparser
 from dingtalkchatbot.chatbot import DingtalkChatbot, CardItem, ActionCard
 import dateparser
@@ -21,7 +21,7 @@ class RssRobot:
             pc_slide=True, secret=os.environ.get("DD_SECRET"))
 
     def parse_rss(self):
-        # self.remove_old_history()
+        self.remove_old_history()
         rss_list = Rss.select()
         rss_card_dict = {}
         post_url_list = [rss_history.url for rss_history in
@@ -32,7 +32,7 @@ class RssRobot:
                 CardItem(title=rss.title, url=rss.url, pic_url=rss.cover)]
             feed = feedparser.parse(rss.feed)            
             for entry in feed.entries:
-                if entry.link not in post_url_list and self.is_today(entry):
+                if entry.link not in post_url_list: # and self.is_today(entry):
                     card_list.append(CardItem(title=f'{entry.title}', url=entry.link,
                                             pic_url='https://ftp.bmp.ovh/imgs/2020/07/6cdb9f606677c9e3.jpg'))
                     rss_history_list.append(History(url=entry.link))
@@ -53,8 +53,9 @@ class RssRobot:
             self.robot.send_feed_card(rss_card_dict[key])
     
     def remove_old_history(self):
-        history_list = History.delete().where(History.publish_at < datetime.today().strftime("%Y-%m-%d"))
-        history_list.execute()
+        # 只保留最近一周的记录
+        week_date_range = datetime.now() + timedelta(days=-7)
+        History.delete().where(History.publish_at < week_date_range.strftime("%Y-%m-%d")).execute()
 
 def send_rss():
     rss_bot = RssRobot()
