@@ -56,7 +56,6 @@ class RssRobot:
         history_list = History.delete().where(History.publish_at < datetime.today().strftime("%Y-%m-%d"))
         history_list.execute()
 
-
 def send_rss():
     rss_bot = RssRobot()
     rss_bot.send_rss()
