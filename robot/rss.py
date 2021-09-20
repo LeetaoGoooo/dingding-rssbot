@@ -21,7 +21,7 @@ class RssRobot:
             pc_slide=True, secret=os.environ.get("DD_SECRET"))
 
     def parse_rss(self):
-        # self.remove_old_history()
+        self.remove_old_history()
         rss_list = Rss.select()
         rss_card_dict = {}
         post_url_list = [rss_history.url for rss_history in
@@ -56,7 +56,6 @@ class RssRobot:
         # 只保留最近一周的记录
         week_date_range = datetime.now() + timedelta(days=-7)
         History.delete().where(History.publish_at < week_date_range.strftime("%Y-%m-%d")).execute()
-
 
 def send_rss():
     rss_bot = RssRobot()
