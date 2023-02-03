@@ -20,11 +20,11 @@ fork 本项目后，需要进行配置后才能正常使用
 
 ## 配置环境变量
 
-钉钉机器人需要使用 `webhook` 和 `secret` 这两个参考钉钉机器人文档自行申请。
+钉钉机器人需要使用 `WEBHOOK` 和 `SECRET` 这两个参考钉钉机器人文档自行申请。
 
-还需要申请一个 `GITHUB_TOKEN`,在 `个人 profile` => `Developer settings` => `Personal access tokens`
+还需要申请一个 `TOKEN`,在 `个人 profile` => `Developer settings` => `Personal access tokens`
 
-然后在项目的 settings 中依次添加 `webhook`,`secret`,`github_token` 三个参数
+然后在项目的 settings 中依次添加 `WEBHOOK`,`SECRET`,`TOKEN` 三个参数
 
 ## ⚠️ 分支问题
 
