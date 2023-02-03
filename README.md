@@ -26,3 +26,6 @@ fork 本项目后，需要进行配置后才能正常使用
 
 然后在项目的 settings 中依次添加 `webhook`,`secret`,`github_token` 三个参数
 
+## ⚠️ 分支问题
+
+默认使用的是 dev 分支，fork 正常只会 fork 主分支，可以参考 https://github.com/LeetaoGoooo/dingding-rssbot/issues/7 进行修改
