@@ -10,10 +10,10 @@ class BaseModel(Model):
 
 
 class Rss(BaseModel):
-    feed = CharField(unique=True)
-    cover = CharField(max_length=255)
-    title = CharField(max_length=20)
-    url = CharField(max_length=255)
+    feed = CharField(unique=True)  # 订阅地址
+    cover = CharField(max_length=255, null=True)  # 封面(图片地址)
+    title = CharField(max_length=20)  # 订阅名称
+    url = CharField(max_length=255)   # 网站地址
 
 
 class History(BaseModel):

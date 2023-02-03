@@ -11,12 +11,10 @@ jobs:
     steps:
     - name: 'Checkout codes'
       uses: actions/checkout@v2
-      with:
-        ref: dev
-    - name: Set up Python 3.7.6
+    - name: Set up Python 3.8.6
       uses: actions/setup-python@v2
       with:
-        python-version: 3.7.6
+        python-version: 3.8.6
     - name: Install dependencies
       run: |
         cd robot
@@ -37,6 +35,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: dev
+        branch: main
         github_token: ${{ secrets.TOKEN }}
 
