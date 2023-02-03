@@ -29,6 +29,13 @@ class Rss(BaseModel):
 
 ⚠️ **频率不要太频繁，避免被误判滥用**
 
+其中 31 和 32 行配置可以设置为自己的邮箱和名称
+
+```yaml
+git config --global user.email lineporte@gmail.com
+git config --global user.name linep47
+```
+
 ## 配置环境变量
 
 钉钉机器人需要使用 `WEBHOOK` 和 `SECRET`（对应**加签**） 这两个参考钉钉机器人文档自行申请。
